@@ -61,7 +61,8 @@ class PacketsViewModel: BaseListViewModel<BagelPacket>  {
     func filter(items: [BagelPacket]) -> [BagelPacket] {
         var filteredItems = performAddressFiltration(items)
         filteredItems = performMethodFiltration(filteredItems)
-        return performStatusFiltration(filteredItems)
+        filteredItems = performStatusFiltration(filteredItems)
+        return performUrlFiltration(filteredItems)
     }
     
     func performAddressFiltration(_ items: [BagelPacket])  -> [BagelPacket] {
@@ -94,6 +95,17 @@ class PacketsViewModel: BaseListViewModel<BagelPacket>  {
         
         return items.filter
             { $0.requestInfo?.statusCode?.contains(self.statusFilterTerm) ?? false
+        }
+    }
+
+    private let ignoreUrlPermanentList: Set<String> = [
+
+    ]
+    func performUrlFiltration(_ items: [BagelPacket]) -> [BagelPacket] {
+        items.filter { bagelPacket in
+            !ignoreUrlPermanentList.contains { url in
+                bagelPacket.requestInfo?.url?.hasPrefix(url) == true
+            }
         }
     }
     
