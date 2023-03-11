@@ -99,15 +99,7 @@ class PacketsViewModel: BaseListViewModel<BagelPacket>  {
     }
 
     private let ignoreUrlPermanentList: Set<String> = [
-        "https://api.mixpanel.com",
-        "https://api.dev-wi.se/v1/critical-communications",
-        "https://app-measurement.com",
-        "https://api.dev-wi.se/v2/features",
-        "https://launches.appsflyer.com",
-        "https://firebaselogging-pa.googleapis.com",
-        "https://app-measurement.com",
-        "https://sdk.fra-01.braze.eu/api/v3/data",
-        "https://loki-yqwt6u3c8u2q7u5x79dezczq5hxy7nnf.dev-wi.se"
+
     ]
     func performUrlFiltration(_ items: [BagelPacket]) -> [BagelPacket] {
         items.filter { bagelPacket in
